@@ -21,10 +21,11 @@ export class Canva implements INodeType {
 			},
 		],
 		requestDefaults: {
-			baseURL: '={{$credentials.environment === "sandbox" ? "https://api.canva.com/rest/v1" : "https://api.canva.com/rest/v1"}}',
+			baseURL: 'https://api.canva.com/rest/v1',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
+				Authorization: '=Bearer {{$credentials.accessToken}}',
 			},
 		},
 		properties: [
@@ -84,6 +85,11 @@ export class Canva implements INodeType {
 						name: 'User',
 						value: 'users',
 						description: 'Informações do usuário',
+					},
+					{
+						name: 'Key',
+						value: 'keys',
+						description: 'Gerenciar chaves de API',
 					},
 				],
 				default: 'designs',
@@ -421,6 +427,36 @@ export class Canva implements INodeType {
 					},
 				],
 				default: 'getProfile',
+			},
+
+			// ===========================================
+			// KEYS OPERATIONS
+			// ===========================================
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['keys'],
+					},
+				},
+				options: [
+					{
+						name: 'List',
+						value: 'list',
+						action: 'List API keys',
+						description: 'Listar chaves de API do usuário',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '/keys',
+							},
+						},
+					},
+				],
+				default: 'list',
 			},
 
 			// ===========================================

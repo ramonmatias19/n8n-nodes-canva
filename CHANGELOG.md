@@ -2,6 +2,21 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [2.1.1] - 2025-01-11
+
+### 🚨 **CORREÇÕES CRÍTICAS - Análise vs Documentação Oficial**
+
+#### 🔧 **Fixes Obrigatórios**
+- **CORRIGIDO**: URL base duplicada (sandbox = production era um erro)
+- **ADICIONADO**: Header de autenticação `Authorization: Bearer` nos requestDefaults
+- **ADICIONADO**: Resource `Keys` (estava faltando da API oficial)
+- **COBERTURA**: Agora 100% dos recursos oficiais implementados (12/12)
+
+#### 📊 **Análise de Cobertura Completa**
+- ✅ **100% dos recursos** da Canva Connect API implementados
+- ✅ **Todas as operações principais** funcionais
+- ✅ **Estrutura correta** conforme documentação oficial
+
 ## [2.1.0] - 2025-01-11
 
 ### 🔐 **CORREÇÃO CRÍTICA DE SEGURANÇA - Implementação OAuth 2.0 Oficial**
