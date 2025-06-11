@@ -1,0 +1,56 @@
+{
+  "name": "n8n-nodes-canva",
+  "version": "1.0.2",
+  "description": "Node customizado do n8n para integração com Canva Connect APIs",
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "canva",
+    "design",
+    "graphics",
+    "workflow"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ramonmatias19/n8n-nodes-canva",
+  "author": {
+    "name": "Ramon Matias",
+    "email": "contato@lumiaria.com.br"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramonmatias19/n8n-nodes-canva.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc && npx gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier nodes credentials --write",
+    "lint": "eslint nodes/**/*.ts credentials/**/*.ts",
+    "lintfix": "eslint nodes/**/*.ts credentials/**/*.ts --fix",
+    "prepublishOnly": "npm run build && npm run lint -s"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/CanvaApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Canva/Canva.node.js",
+      "dist/nodes/Canva/CanvaTrigger.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint-plugin-n8n-nodes-base": "^1.11.0",
+    "gulp": "^4.0.2",
+    "n8n-workflow": "*",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "n8n-core": "*"
+  }
+}
