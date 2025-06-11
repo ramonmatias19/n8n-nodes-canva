@@ -170,7 +170,7 @@ npm install n8n-nodes-canva
 
 ### 🔑 Configuração de Credenciais
 
-Para usar este node, você precisa configurar suas credenciais da API do Canva seguindo o fluxo OAuth 2.0 oficial:
+Este node agora usa **OAuth 2.0 nativo do n8n** para autenticação automática:
 
 1. **Crie uma integração no [Canva Developer Portal](https://www.canva.dev/)**
    - Faça login no Developer Portal
@@ -183,20 +183,22 @@ Para usar este node, você precisa configurar suas credenciais da API do Canva s
    - **Copie o Client ID** (será necessário no n8n)
    - **Gere e salve o Client Secret** (será necessário no n8n)
    - Configure os scopes necessários para suas operações
-   - Adicione uma URL de redirecionamento (se usando OAuth completo)
+   - **IMPORTANTE**: Adicione URL de redirecionamento OAuth: `http://localhost:5678/rest/oauth2-credential/callback`
 
 3. **No n8n, crie uma nova credencial "Canva API":**
    - **Client ID**: Cole o Client ID obtido no Developer Portal
    - **Client Secret**: Cole o Client Secret gerado no Developer Portal
-   - **Access Token**: Pode ser obtido manualmente ou via OAuth (opcional)
-   - **Refresh Token**: Para renovação automática do Access Token (opcional)
-   - **Environment**: Selecione Production ou Sandbox
+   - Clique em **"Connect my account"** para iniciar o fluxo OAuth
+   - Autorize a aplicação na tela do Canva
+   - ✅ **Pronto!** O n8n gerenciará automaticamente tokens e renovações
 
-4. **Obtenha Access Token (se necessário):**
-   - Use o fluxo OAuth 2.0 com PKCE conforme documentação oficial
-   - Ou obtenha manualmente via API testing tools
+4. **🎯 Vantagens do OAuth Nativo:**
+   - ✅ **Configuração simplificada** - Apenas Client ID e Secret
+   - ✅ **Renovação automática** - n8n gerencia refresh tokens
+   - ✅ **Segurança aprimorada** - Sem tokens manuais expostos
+   - ✅ **Fluxo padrão** - Mesma experiência de outros nodes n8n
 
-> **Nota**: A implementação agora segue as melhores práticas de segurança da Canva Connect API com suporte completo ao OAuth 2.0.
+> **Migração**: Se você usava versões anteriores com Access Token manual, delete a credencial antiga e crie uma nova seguindo os passos acima.
 
 ### 📡 Configuração de Webhooks
 

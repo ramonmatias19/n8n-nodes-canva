@@ -2,6 +2,30 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [2.1.2] - 2025-06-11
+
+### 🚨 **CORREÇÃO CRÍTICA - Implementação OAuth 2.0 Nativa do n8n**
+
+#### 🔧 **Fix Obrigatório - Remoção de Access Token Manual**
+- **REMOVIDO**: Campos manuais `Access Token` e `Refresh Token`
+- **IMPLEMENTADO**: OAuth 2.0 com PKCE nativo do n8n (extends oAuth2Api)
+- **CORRIGIDO**: Autenticação agora usa `{{$credentials.oauthTokenData.access_token}}`
+- **ADICIONADO**: Configuração automática de PKCE com S256
+
+#### 📊 **Benefícios da Correção**
+- ✅ **Fluxo OAuth automático** - n8n gerencia tokens automaticamente
+- ✅ **Renovação automática** - Refresh tokens gerenciados pelo n8n
+- ✅ **Segurança aprimorada** - Sem tokens manuais expostos
+- ✅ **UX melhorada** - Configuração mais simples para usuários
+
+#### 🔄 **Como Migrar**
+1. **Delete** a credencial Canva API antiga
+2. **Crie** nova credencial Canva API 
+3. **Configure** apenas Client ID e Client Secret
+4. **Execute** o fluxo OAuth automático do n8n
+
+> **Importante**: Esta correção resolve o problema identificado onde o HTTP Request não precisava de Access Token porque usa OAuth 2.0 nativo do n8n.
+
 ## [2.1.1] - 2025-06-11
 
 ### 🚨 **CORREÇÕES CRÍTICAS - Análise vs Documentação Oficial**

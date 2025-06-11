@@ -9,7 +9,28 @@ export class CanvaApi implements ICredentialType {
 	name = 'canvaApi';
 	displayName = 'Canva API';
 	documentationUrl = 'https://www.canva.dev/docs/connect/';
+	extends = ['oAuth2Api'];
 	properties: INodeProperties[] = [
+		{
+			displayName: 'Grant Type',
+			name: 'grantType',
+			type: 'hidden',
+			default: 'pkce',
+		},
+		{
+			displayName: 'Authorization URL',
+			name: 'authUrl',
+			type: 'hidden',
+			default: 'https://www.canva.com/api/oauth/authorize',
+			required: true,
+		},
+		{
+			displayName: 'Access Token URL',
+			name: 'accessTokenUrl',
+			type: 'hidden',
+			default: 'https://api.canva.com/rest/v1/oauth/token',
+			required: true,
+		},
 		{
 			displayName: 'Client ID',
 			name: 'clientId',
@@ -28,37 +49,22 @@ export class CanvaApi implements ICredentialType {
 			description: 'Client Secret gerado no Canva Developer Portal',
 		},
 		{
-			displayName: 'Access Token',
-			name: 'accessToken',
-			type: 'string',
-			typeOptions: { password: true },
-			default: '',
-			description: 'Access Token para autenticação na API do Canva (obtido via OAuth ou manualmente)',
+			displayName: 'Scope',
+			name: 'scope',
+			type: 'hidden',
+			default: 'app:read app:write asset:read asset:write brandtemplate:content:read brandtemplate:meta:read comment:read comment:write design:content:read design:content:write design:meta:read design:permission:read export:read export:write folder:read folder:write profile:read user:read',
 		},
 		{
-			displayName: 'Refresh Token',
-			name: 'refreshToken',
-			type: 'string',
-			typeOptions: { password: true },
-			default: '',
-			description: 'Refresh Token para renovar automaticamente o Access Token',
+			displayName: 'Auth URI Query Parameters',
+			name: 'authQueryParameters',
+			type: 'hidden',
+			default: 'response_type=code&code_challenge_method=S256',
 		},
 		{
-			displayName: 'Environment',
-			name: 'environment',
-			type: 'options',
-			options: [
-				{
-					name: 'Production',
-					value: 'production',
-				},
-				{
-					name: 'Sandbox',
-					value: 'sandbox',
-				},
-			],
-			default: 'production',
-			description: 'Ambiente da API do Canva a ser utilizado',
+			displayName: 'Authentication',
+			name: 'authentication',
+			type: 'hidden',
+			default: 'header',
 		},
 	];
 
@@ -66,14 +72,14 @@ export class CanvaApi implements ICredentialType {
 		type: 'generic',
 		properties: {
 			headers: {
-				Authorization: '=Bearer {{$credentials.accessToken}}',
+				Authorization: '=Bearer {{$credentials.oauthTokenData.access_token}}',
 			},
 		},
 	};
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '={{$credentials.environment === "sandbox" ? "https://api.canva.com/rest/v1" : "https://api.canva.com/rest/v1"}}',
+			baseURL: 'https://api.canva.com/rest/v1',
 			url: '/users/me',
 			method: 'GET',
 		},
