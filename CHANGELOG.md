@@ -2,7 +2,7 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
-## [2.1.1] - 2025-01-11
+## [2.1.1] - 2025-06-11
 
 ### 🚨 **CORREÇÕES CRÍTICAS - Análise vs Documentação Oficial**
 
@@ -17,7 +17,7 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 - ✅ **Todas as operações principais** funcionais
 - ✅ **Estrutura correta** conforme documentação oficial
 
-## [2.1.0] - 2025-01-11
+## [2.1.0] - 2025-06-11
 
 ### 🔐 **CORREÇÃO CRÍTICA DE SEGURANÇA - Implementação OAuth 2.0 Oficial**
 
@@ -65,7 +65,7 @@ A implementação agora segue **100%** as especificações da [Canva Connect API
 
 ---
 
-## [2.0.0] - 2025-01-11
+## [2.0.0] - 2025-06-11
 
 ### 🚀 **IMPLEMENTAÇÃO COMPLETA da API CANVA CONNECT**
 
