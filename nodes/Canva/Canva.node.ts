@@ -41,9 +41,29 @@ export class Canva implements INodeType {
 						description: 'Gerenciar assets (imagens, vídeos, áudios)',
 					},
 					{
+						name: 'Autofill',
+						value: 'autofill',
+						description: 'Preencher templates automaticamente com dados',
+					},
+					{
+						name: 'Brand Template',
+						value: 'brandTemplates',
+						description: 'Gerenciar templates de marca',
+					},
+					{
+						name: 'Comment',
+						value: 'comments',
+						description: 'Gerenciar comentários em designs',
+					},
+					{
 						name: 'Design',
 						value: 'designs',
 						description: 'Gerenciar designs e templates',
+					},
+					{
+						name: 'Design Import',
+						value: 'designImports',
+						description: 'Importar designs de URLs',
 					},
 					{
 						name: 'Export',
@@ -54,6 +74,11 @@ export class Canva implements INodeType {
 						name: 'Folder',
 						value: 'folders',
 						description: 'Gerenciar pastas de organização',
+					},
+					{
+						name: 'Resize',
+						value: 'resizes',
+						description: 'Redimensionar designs',
 					},
 					{
 						name: 'User',
@@ -79,6 +104,21 @@ export class Canva implements INodeType {
 				},
 				options: [
 					{
+						name: 'Clone',
+						value: 'clone',
+						action: 'Clone design',
+						description: 'Clonar um design existente',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '=/designs/{{$parameter["designId"]}}/clone',
+								body: {
+									title: '={{$parameter["cloneTitle"] || undefined}}',
+								},
+							},
+						},
+					},
+					{
 						name: 'Create',
 						value: 'create',
 						action: 'Create design',
@@ -95,6 +135,18 @@ export class Canva implements INodeType {
 						},
 					},
 					{
+						name: 'Delete',
+						value: 'delete',
+						action: 'Delete design',
+						description: 'Deletar um design',
+						routing: {
+							request: {
+								method: 'DELETE',
+								url: '=/designs/{{$parameter["designId"]}}',
+							},
+						},
+					},
+					{
 						name: 'Get',
 						value: 'get',
 						action: 'Get design',
@@ -103,6 +155,18 @@ export class Canva implements INodeType {
 							request: {
 								method: 'GET',
 								url: '=/designs/{{$parameter["designId"]}}',
+							},
+						},
+					},
+					{
+						name: 'Get Pages',
+						value: 'getPages',
+						action: 'Get design pages',
+						description: 'Obter metadata das páginas do design',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/designs/{{$parameter["designId"]}}/pages',
 							},
 						},
 					},
@@ -120,6 +184,22 @@ export class Canva implements INodeType {
 									ownership: '={{$parameter["ownership"] || "owned"}}',
 									sort_by: '={{$parameter["sortBy"] || "modified"}}',
 									limit: '={{$parameter["limit"] || 10}}',
+									continuation: '={{$parameter["continuation"] || undefined}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'Update',
+						value: 'update',
+						action: 'Update design',
+						description: 'Atualizar título do design',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '=/designs/{{$parameter["designId"]}}',
+								body: {
+									title: '={{$parameter["newTitle"]}}',
 								},
 							},
 						},
@@ -154,8 +234,24 @@ export class Canva implements INodeType {
 								body: {
 									format: {
 										type: '={{$parameter["exportFormat"]}}',
+										quality: '={{$parameter["quality"] || undefined}}',
+										transparent_background: '={{$parameter["transparentBackground"] || undefined}}',
+										lossless: '={{$parameter["lossless"] || undefined}}',
 									},
+									pages: '={{$parameter["pageNumbers"] || undefined}}',
 								},
+							},
+						},
+					},
+					{
+						name: 'Get Export Formats',
+						value: 'getFormats',
+						action: 'Get export formats',
+						description: 'Obter formatos suportados para exportação',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/designs/{{$parameter["designId"]}}/export-formats',
 							},
 						},
 					},
@@ -200,7 +296,32 @@ export class Canva implements INodeType {
 								url: '/folders',
 								body: {
 									name: '={{$parameter["folderName"]}}',
+									parent_folder_id: '={{$parameter["parentFolderId"] || undefined}}',
 								},
+							},
+						},
+					},
+					{
+						name: 'Delete',
+						value: 'delete',
+						action: 'Delete folder',
+						description: 'Deletar uma pasta',
+						routing: {
+							request: {
+								method: 'DELETE',
+								url: '=/folders/{{$parameter["folderId"]}}',
+							},
+						},
+					},
+					{
+						name: 'Get',
+						value: 'get',
+						action: 'Get folder',
+						description: 'Obter informações de uma pasta específica',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/folders/{{$parameter["folderId"]}}',
 							},
 						},
 					},
@@ -215,6 +336,55 @@ export class Canva implements INodeType {
 								url: '/folders',
 								qs: {
 									limit: '={{$parameter["limit"] || 10}}',
+									continuation: '={{$parameter["continuation"] || undefined}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'List Items',
+						value: 'listItems',
+						action: 'List folder items',
+						description: 'Listar itens dentro de uma pasta',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/folders/{{$parameter["folderId"]}}/items',
+								qs: {
+									limit: '={{$parameter["limit"] || 10}}',
+									item_types: '={{$parameter["itemTypes"] || undefined}}',
+									continuation: '={{$parameter["continuation"] || undefined}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'Move Item',
+						value: 'moveItem',
+						action: 'Move folder item',
+						description: 'Mover item para outra pasta',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '=/folders/{{$parameter["folderId"]}}/items/move',
+								body: {
+									item_id: '={{$parameter["itemId"]}}',
+									item_type: '={{$parameter["itemType"]}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'Update',
+						value: 'update',
+						action: 'Update folder',
+						description: 'Atualizar nome da pasta',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '=/folders/{{$parameter["folderId"]}}',
+								body: {
+									name: '={{$parameter["newFolderName"]}}',
 								},
 							},
 						},
@@ -268,6 +438,18 @@ export class Canva implements INodeType {
 				},
 				options: [
 					{
+						name: 'Delete',
+						value: 'delete',
+						action: 'Delete asset',
+						description: 'Deletar um asset',
+						routing: {
+							request: {
+								method: 'DELETE',
+								url: '=/assets/{{$parameter["assetId"]}}',
+							},
+						},
+					},
+					{
 						name: 'Get',
 						value: 'get',
 						action: 'Get asset',
@@ -290,12 +472,341 @@ export class Canva implements INodeType {
 								url: '/assets',
 								qs: {
 									limit: '={{$parameter["limit"] || 10}}',
+									tags: '={{$parameter["tags"] || undefined}}',
+									continuation: '={{$parameter["continuation"] || undefined}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'Update',
+						value: 'update',
+						action: 'Update asset',
+						description: 'Atualizar metadata de um asset',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '=/assets/{{$parameter["assetId"]}}',
+								body: {
+									name: '={{$parameter["assetName"] || undefined}}',
+									tags: '={{$parameter["assetTags"] || undefined}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'Upload',
+						value: 'upload',
+						action: 'Upload asset',
+						description: 'Fazer upload de um novo asset',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/assets',
+								headers: {
+									'Content-Type': 'multipart/form-data',
+								},
+								body: {
+									file: '={{$parameter["fileData"]}}',
+									name: '={{$parameter["fileName"] || undefined}}',
+									tags: '={{$parameter["uploadTags"] || undefined}}',
 								},
 							},
 						},
 					},
 				],
 				default: 'get',
+			},
+
+			// ===========================================
+			// BRAND TEMPLATES OPERATIONS
+			// ===========================================
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['brandTemplates'],
+					},
+				},
+				options: [
+					{
+						name: 'Get',
+						value: 'get',
+						action: 'Get brand template',
+						description: 'Obter um template de marca específico',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/brand-templates/{{$parameter["templateId"]}}',
+							},
+						},
+					},
+					{
+						name: 'Get Dataset',
+						value: 'getDataset',
+						action: 'Get brand template dataset',
+						description: 'Obter dataset de um template de marca',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/brand-templates/{{$parameter["templateId"]}}/dataset',
+							},
+						},
+					},
+					{
+						name: 'List',
+						value: 'list',
+						action: 'List brand templates',
+						description: 'Listar templates de marca',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '/brand-templates',
+								qs: {
+									limit: '={{$parameter["limit"] || 10}}',
+									dataset: '={{$parameter["dataset"] || undefined}}',
+									continuation: '={{$parameter["continuation"] || undefined}}',
+								},
+							},
+						},
+					},
+				],
+				default: 'list',
+			},
+
+			// ===========================================
+			// AUTOFILL OPERATIONS
+			// ===========================================
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['autofill'],
+					},
+				},
+				options: [
+					{
+						name: 'Create Job',
+						value: 'createJob',
+						action: 'Create autofill job',
+						description: 'Criar job de preenchimento automático',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/autofills',
+								body: {
+									brand_template_id: '={{$parameter["brandTemplateId"]}}',
+									title: '={{$parameter["autofillTitle"] || undefined}}',
+									data: '={{$parameter["autofillData"]}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'Get Job',
+						value: 'getJob',
+						action: 'Get autofill job',
+						description: 'Verificar status de job de autofill',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/autofills/{{$parameter["jobId"]}}',
+							},
+						},
+					},
+				],
+				default: 'createJob',
+			},
+
+			// ===========================================
+			// COMMENTS OPERATIONS
+			// ===========================================
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['comments'],
+					},
+				},
+				options: [
+					{
+						name: 'Create Thread',
+						value: 'createThread',
+						action: 'Create comment thread',
+						description: 'Criar nova thread de comentário',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/comments',
+								body: {
+									design_id: '={{$parameter["designId"]}}',
+									message: '={{$parameter["message"]}}',
+									anchor_point: '={{$parameter["anchorPoint"] || undefined}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'Create Reply',
+						value: 'createReply',
+						action: 'Create reply',
+						description: 'Responder a um comentário',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '=/comments/{{$parameter["threadId"]}}/replies',
+								body: {
+									message: '={{$parameter["replyMessage"]}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'Get Thread',
+						value: 'getThread',
+						action: 'Get comment thread',
+						description: 'Obter thread de comentário',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/comments/{{$parameter["threadId"]}}',
+							},
+						},
+					},
+					{
+						name: 'Get Reply',
+						value: 'getReply',
+						action: 'Get reply',
+						description: 'Obter resposta específica',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/comments/{{$parameter["threadId"]}}/replies/{{$parameter["replyId"]}}',
+							},
+						},
+					},
+					{
+						name: 'List Replies',
+						value: 'listReplies',
+						action: 'List replies',
+						description: 'Listar respostas de uma thread',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/comments/{{$parameter["threadId"]}}/replies',
+								qs: {
+									limit: '={{$parameter["limit"] || 10}}',
+									continuation: '={{$parameter["continuation"] || undefined}}',
+								},
+							},
+						},
+					},
+				],
+				default: 'createThread',
+			},
+
+			// ===========================================
+			// DESIGN IMPORTS OPERATIONS
+			// ===========================================
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['designImports'],
+					},
+				},
+				options: [
+					{
+						name: 'Create URL Import Job',
+						value: 'createUrlImport',
+						action: 'Create URL import job',
+						description: 'Importar design de uma URL',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/imports',
+								body: {
+									import_method: {
+										type: 'url',
+										url: '={{$parameter["importUrl"]}}',
+									},
+									title: '={{$parameter["importTitle"] || undefined}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'Get Import Job',
+						value: 'getImportJob',
+						action: 'Get import job',
+						description: 'Verificar status de importação',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/imports/{{$parameter["importJobId"]}}',
+							},
+						},
+					},
+				],
+				default: 'createUrlImport',
+			},
+
+			// ===========================================
+			// RESIZES OPERATIONS
+			// ===========================================
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['resizes'],
+					},
+				},
+				options: [
+					{
+						name: 'Create Resize Job',
+						value: 'createResize',
+						action: 'Create resize job',
+						description: 'Redimensionar um design',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '=/designs/{{$parameter["designId"]}}/resize',
+								body: {
+									design_type: '={{$parameter["newDesignType"]}}',
+									title: '={{$parameter["resizeTitle"] || undefined}}',
+								},
+							},
+						},
+					},
+					{
+						name: 'Get Resize Job',
+						value: 'getResizeJob',
+						action: 'Get resize job',
+						description: 'Verificar status de redimensionamento',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/resizes/{{$parameter["resizeJobId"]}}',
+							},
+						},
+					},
+				],
+				default: 'createResize',
 			},
 
 			// ===========================================
