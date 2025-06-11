@@ -11,12 +11,37 @@ export class CanvaApi implements ICredentialType {
 	documentationUrl = 'https://www.canva.dev/docs/connect/';
 	properties: INodeProperties[] = [
 		{
+			displayName: 'Client ID',
+			name: 'clientId',
+			type: 'string',
+			default: '',
+			required: true,
+			description: 'Client ID obtido no Canva Developer Portal',
+		},
+		{
+			displayName: 'Client Secret',
+			name: 'clientSecret',
+			type: 'string',
+			typeOptions: { password: true },
+			default: '',
+			required: true,
+			description: 'Client Secret gerado no Canva Developer Portal',
+		},
+		{
 			displayName: 'Access Token',
 			name: 'accessToken',
 			type: 'string',
 			typeOptions: { password: true },
 			default: '',
-			description: 'Access Token para autenticação na API do Canva',
+			description: 'Access Token para autenticação na API do Canva (obtido via OAuth ou manualmente)',
+		},
+		{
+			displayName: 'Refresh Token',
+			name: 'refreshToken',
+			type: 'string',
+			typeOptions: { password: true },
+			default: '',
+			description: 'Refresh Token para renovar automaticamente o Access Token',
 		},
 		{
 			displayName: 'Environment',

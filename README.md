@@ -6,6 +6,7 @@ Este Community Node é uma solução 100% gratuita, criada com o intuito de simp
 <br>
 	
 <div align="center">
+  <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.npmjs.org%2Fdownloads%2Fpoint%2Flast-year%2Fn8n-nodes-canva&query=downloads&style=for-the-badge&label=Total%20de%20Downloads&labelColor=%230d1117&color=%23359514&cacheSeconds=30&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fn8n-nodes-agendor" alt="Downloads Badge">
   <img src="https://img.shields.io/npm/v/n8n-nodes-canva?style=for-the-badge&label=Versão&labelColor=%230d1117&color=%23007ACC" alt="Version Badge">
   <img src="https://img.shields.io/npm/l/n8n-nodes-canva?style=for-the-badge&label=Licença&labelColor=%230d1117&color=%23FFA500" alt="License Badge">
 </div>
@@ -169,13 +170,33 @@ npm install n8n-nodes-canva
 
 ### 🔑 Configuração de Credenciais
 
-Para usar este node, você precisa configurar suas credenciais da API do Canva:
+Para usar este node, você precisa configurar suas credenciais da API do Canva seguindo o fluxo OAuth 2.0 oficial:
 
-1. Crie uma aplicação no [Canva Developer Portal](https://www.canva.dev/)
-2. Obtenha seu Access Token
-3. No n8n, crie uma nova credencial **Canva API**
-4. Insira seu Access Token
-5. Selecione o ambiente (Production ou Sandbox)
+1. **Crie uma integração no [Canva Developer Portal](https://www.canva.dev/)**
+   - Faça login no Developer Portal
+   - Ative a MFA (Multi-Factor Authentication) se necessário
+   - Vá para "Your Integrations" e clique em "Create an integration"
+   - Escolha entre integração "Public" ou "Private"
+
+2. **Configure sua integração:**
+   - Defina um nome para sua integração
+   - **Copie o Client ID** (será necessário no n8n)
+   - **Gere e salve o Client Secret** (será necessário no n8n)
+   - Configure os scopes necessários para suas operações
+   - Adicione uma URL de redirecionamento (se usando OAuth completo)
+
+3. **No n8n, crie uma nova credencial "Canva API":**
+   - **Client ID**: Cole o Client ID obtido no Developer Portal
+   - **Client Secret**: Cole o Client Secret gerado no Developer Portal
+   - **Access Token**: Pode ser obtido manualmente ou via OAuth (opcional)
+   - **Refresh Token**: Para renovação automática do Access Token (opcional)
+   - **Environment**: Selecione Production ou Sandbox
+
+4. **Obtenha Access Token (se necessário):**
+   - Use o fluxo OAuth 2.0 com PKCE conforme documentação oficial
+   - Ou obtenha manualmente via API testing tools
+
+> **Nota**: A implementação agora segue as melhores práticas de segurança da Canva Connect API com suporte completo ao OAuth 2.0.
 
 ### 📡 Configuração de Webhooks
 

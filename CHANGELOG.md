@@ -2,6 +2,54 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [2.1.0] - 2025-01-11
+
+### 🔐 **CORREÇÃO CRÍTICA DE SEGURANÇA - Implementação OAuth 2.0 Oficial**
+
+#### 🚨 **Breaking Change - Credenciais Atualizadas**
+
+**✅ Implementação Correta das Credenciais:**
+- **Adicionado**: `Client ID` (obrigatório) - Conforme documentação oficial
+- **Adicionado**: `Client Secret` (obrigatório) - Conforme documentação oficial  
+- **Adicionado**: `Refresh Token` (opcional) - Para renovação automática
+- **Mantido**: `Access Token` - Agora obtido via OAuth ou manual
+- **Mantido**: `Environment` - Production/Sandbox
+
+#### 📚 **Documentação Atualizada**
+
+**✅ README.md Reformulado:**
+- Instruções completas para configuração OAuth 2.0 com PKCE
+- Passo a passo detalhado no Canva Developer Portal
+- Melhores práticas de segurança implementadas
+- Links para documentação oficial da Canva
+
+#### 🔧 **Migração da v2.0.0**
+
+**Para usuários existentes:**
+1. **Obtenha** Client ID e Client Secret no [Canva Developer Portal](https://www.canva.dev/)
+2. **Atualize** suas credenciais no n8n com os novos campos
+3. **Mantenha** seu Access Token atual (continuará funcionando)
+4. **Configure** Refresh Token para renovação automática (recomendado)
+
+#### 🎯 **Conformidade com Documentação Oficial**
+
+A implementação agora segue **100%** as especificações da [Canva Connect API Authentication](https://www.canva.dev/docs/connect/authentication/):
+- ✅ OAuth 2.0 com PKCE (Proof Key for Code Exchange)
+- ✅ Client credentials para backend authentication
+- ✅ Refresh token support para long-running integrations
+- ✅ Secure token storage patterns
+
+#### 🛡️ **Melhorias de Segurança**
+
+- **Eliminado**: Dependência apenas de Access Token manual
+- **Implementado**: Fluxo OAuth completo conforme padrões
+- **Adicionado**: Suporte a token refresh automático
+- **Seguindo**: Melhores práticas de segurança da Canva
+
+> **Nota Importante**: Esta atualização corrige uma implementação incorreta de autenticação que não seguia os padrões oficiais da Canva Connect API. Recomenda-se fortemente a atualização para garantir conformidade e segurança.
+
+---
+
 ## [2.0.0] - 2025-01-11
 
 ### 🚀 **IMPLEMENTAÇÃO COMPLETA da API CANVA CONNECT**
