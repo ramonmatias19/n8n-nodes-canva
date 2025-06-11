@@ -1,86 +1,173 @@
 # n8n-nodes-canva
 
-![n8n.io - Workflow Automation](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png)
+<p align="center"><br>
+Este Community Node é uma solução 100% gratuita, criada com o intuito de simplificar e auxiliar toda a comunidade a integrar e utilizar ao máximo os principais recursos oferecidos pela <b>Canva Connect API</b> em seus projetos no N8N.
+</p>
+<br>
+	
+<div align="center">
+  <img src="https://img.shields.io/npm/v/n8n-nodes-canva?style=for-the-badge&label=Versão&labelColor=%230d1117&color=%23007ACC" alt="Version Badge">
+  <img src="https://img.shields.io/npm/l/n8n-nodes-canva?style=for-the-badge&label=Licença&labelColor=%230d1117&color=%23FFA500" alt="License Badge">
+</div>
+<br>
 
-Este é um pacote de community node para n8n que permite integração com a [API Connect do Canva](https://www.canva.dev/docs/connect/).
+<p align="center">
+  <a href="mailto:contato@lumiaria.com.br"><img src="https://img.shields.io/badge/Email-Suporte-red?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"></a>     
+  <a href="https://github.com/ramonmatias19/n8n-nodes-canva"><img src="https://img.shields.io/badge/GitHub-Repositório-black?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>     
+  <a href="https://www.npmjs.com/package/n8n-nodes-canva"><img src="https://img.shields.io/badge/NPM-Package-red?style=for-the-badge&logo=npm&logoColor=white" alt="NPM"></a>
+</p>
 
-[n8n](https://n8n.io/) é uma ferramenta de automação de workflow [fair-code](http://faircode.io) distribuída.
+> **Aviso:** Este node foi desenvolvido de forma independente para facilitar integrações com a API pública da Canva no n8n.  
+> Não é afiliado, endossado ou mantido pela Canva Pty Ltd.  
+> Todas as marcas citadas pertencem aos seus respectivos proprietários.
 
-**DISCLAMER**: Este node foi desenvolvido de forma independente e não é afiliado à Canva Pty Ltd. É um projeto desenvolvido pela comunidade para facilitar a integração com os serviços da Canva.
+<h1></h1>
 
-## Instalação
+<h3>⚙️ Requisitos</h3>
 
-Para usar este community node, você precisa tê-lo instalado em sua instância n8n.
+Para utilizar o nosso **Community Node**, é necessário atender aos seguintes requisitos:  
+- **N8N** na versão **1.54.4** ou superior  
+- **Node.js** na versão **16.0.0** ou superior  
+- **Conta ativa** na **Canva** com acesso à Connect API  
+- **Application registrada** no [Canva Developer Portal](https://www.canva.dev/)
 
-### Community Nodes (Recomendado)
+<h1></h1>
 
-1. Vá para **Settings > Community Nodes**
-2. Selecione **Install**
-3. Digite `n8n-nodes-canva` na caixa **Enter npm package name**
-4. Aceite os riscos de usar um community node: clique **I understand the risks of installing unverified code from a public source**
-5. Selecione **Install**
+<h3>📌 Recursos Disponíveis</h3>
 
-Após a instalação, você encontrará **Canva** e **Canva Trigger** disponíveis como nodes.
+<h3>🎨 Designs</h3>
+✨ Este recurso oferece acesso completo às principais funcionalidades relacionadas ao gerenciamento de designs no Canva. Ele permite criar novos projetos, buscar designs existentes, listar seus trabalhos e gerenciar todo o ciclo de vida dos designs de forma prática e eficiente.
+<br>
+<details>
+  <summary><b>Lista de operações</b></summary>
+	<details>
+  	<summary>   ✅ <b> Criar Design</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Buscar Design</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Listar Designs</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Tipos Suportados</b></summary>
+	</details>
+</details>
 
-### Manual installation
+<h3>📤 Exportações</h3>
+🔄 Com este recurso, você conta com funcionalidades completas para exportar seus designs em diferentes formatos. Ele abrange desde a criação de jobs de exportação até o monitoramento do status de processamento, permitindo obter seus arquivos finalizados nos formatos PDF, PNG, JPG e MP4.
+<br>
+<details>
+  <summary><b>Lista de operações</b></summary>
+	<details>
+  	<summary>   ✅ <b> Criar Job de Exportação</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Verificar Status da Exportação</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Formatos PDF</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Formatos PNG/JPG</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Formatos MP4</b></summary>
+	</details>
+</details>
 
-Para instalar manualmente o community node para sua instância n8n:
+<h3>📁 Pastas</h3>
+🗂️ Este recurso disponibiliza ferramentas essenciais para organização e gerenciamento de pastas no Canva. Com ele, é possível criar novas pastas, organizar seus designs de forma estruturada e manter um workspace organizado para melhor produtividade.
+<br>
+<details>
+  <summary><b>Lista de operações</b></summary>
+	<details>
+  	<summary>   ✅ <b> Criar Pasta</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Listar Pastas</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Organizar Conteúdo</b></summary>
+	</details>
+</details>
 
-1. [Instale o npm com o Node.js](https://nodejs.org/en/download/)
-2. Instale o pacote no diretório da sua instância n8n:
-   ```
-   cd ~/.n8n # ou o diretório onde sua instância n8n está localizada
-   npm install n8n-nodes-canva
-   ```
-3. Reinicie n8n
+<h3>🖼️ Assets</h3>
+📷 Com este recurso, você tem acesso ao gerenciamento de assets e elementos visuais no Canva. Ele permite buscar assets específicos, listar elementos disponíveis e gerenciar recursos visuais para seus projetos de forma eficiente.
+<br>
+<details>
+  <summary><b>Lista de operações</b></summary>
+	<details>
+  	<summary>   ✅ <b> Buscar Asset</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Listar Assets</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Gerenciar Recursos</b></summary>
+	</details>
+</details>
 
-## Funcionalidades
+<h3>👤 Usuários</h3>
+🔐 Este recurso oferece funcionalidades para gerenciamento de informações de usuário e perfil. Com ele, é possível obter dados do usuário atual, verificar permissões e acessar informações de conta de forma segura.
+<br>
+<details>
+  <summary><b>Lista de operações</b></summary>
+	<details>
+  	<summary>   ✅ <b> Obter Perfil</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Verificar Permissões</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Informações da Conta</b></summary>
+	</details>
+</details>
 
-Este pacote contém dois nodes:
+<h3>🔔 Webhooks</h3>
+📡 Este recurso oferece funcionalidades completas para receber notificações em tempo real de eventos do Canva através de webhooks. Com ele, você pode monitorar criação de designs, atualizações, exportações concluídas e outros eventos importantes, permitindo automações instantâneas baseadas nas atividades da sua conta.
+<br>
+<details>
+  <summary><b>Lista de operações</b></summary>
+	<details>
+  	<summary>   ✅ <b> Design Criado</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Design Atualizado</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Exportação Concluída</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Asset Eventos</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Pasta Eventos</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Comentário Eventos</b></summary>
+	</details>
+	<details>
+  	<summary>   ✅ <b> Filtros Personalizados</b></summary>
+	</details>
+</details>
 
-### Canva Node
+<h1></h1>
 
-Permite realizar operações através da API Connect do Canva:
+<h3>🚀 Instalação</h3>
 
-#### Designs
-- **Create**: Criar novos designs
-- **Get**: Buscar informações de um design específico
-- **List**: Listar designs do usuário
+**Via n8n Community Nodes:**
+1. Abra sua instância do n8n
+2. Vá para **Settings** → **Community Nodes**
+3. Instale o pacote: `n8n-nodes-canva`
+4. Reinicie o n8n
 
-#### Exports
-- **Create Export Job**: Iniciar exportação de um design
-- **Get Export Job**: Verificar status de uma exportação
+**Via NPM:**
+```bash
+npm install n8n-nodes-canva
+```
 
-#### Folders
-- **Create**: Criar novas pastas
-- **List**: Listar pastas do usuário
-
-#### Assets
-- **Get**: Buscar informações de um asset específico
-- **List**: Listar assets do usuário
-
-#### Users
-- **Get Profile**: Obter informações do usuário atual
-
-### Canva Trigger
-
-Node trigger que escuta eventos do Canva via webhooks:
-
-#### Eventos Suportados
-- **Asset Events**: Created, Updated, Deleted
-- **Comment Events**: Created, Updated, Deleted  
-- **Design Events**: Created, Updated, Deleted
-- **Export Events**: Completed, Failed
-- **Folder Events**: Created, Updated, Deleted
-
-#### Funcionalidades
-- **Multi-eventos**: Escutar múltiplos tipos de eventos
-- **Filtros por usuário**: Filtrar eventos por usuários específicos
-- **Metadata adicional**: Incluir metadados extras no payload
-
-## Configuração
-
-### Credenciais da API
+### 🔑 Configuração de Credenciais
 
 Para usar este node, você precisa configurar suas credenciais da API do Canva:
 
@@ -90,7 +177,7 @@ Para usar este node, você precisa configurar suas credenciais da API do Canva:
 4. Insira seu Access Token
 5. Selecione o ambiente (Production ou Sandbox)
 
-### Configuração de Webhooks
+### 📡 Configuração de Webhooks
 
 Para usar o **Canva Trigger**:
 
@@ -100,74 +187,18 @@ Para usar o **Canva Trigger**:
 4. O webhook será automaticamente registrado no Canva
 5. Quando desativar o workflow, o webhook será removido automaticamente
 
-## Formatos Suportados
+<h1></h1>
 
-### Tipos de Design
-- Presentation
-- Document
-- Video
-- Logo
-- Poster
-- Instagram Post
+<h3>🤝 Contribuição</h3>
 
-### Formatos de Exportação
-- PDF
-- PNG
-- JPG
-- MP4
+Contribua para o crescimento deste projeto! Você pode ajudar de diversas formas:  
+- **Pull Requests**: Envie melhorias, correções ou novas funcionalidades.  
+- **Issues**: Relate problemas ou sugira novas ideias.  
+- **Sugestões**: Compartilhe suas opiniões e feedbacks.  
+- **Documentação**: Ajude a melhorar ou expandir a documentação existente.  
 
-## Compatibilidade
+<h1></h1>
 
-Testado com:
-- n8n v1.0.0+
-- Node.js 18+
-
-## Recursos
-
-- [Canva Connect API Documentation](https://www.canva.dev/docs/connect/)
-- [n8n Community Nodes](https://docs.n8n.io/integrations/community-nodes/)
-- [Creating n8n nodes](https://docs.n8n.io/integrations/creating-nodes/)
-
-## Versões
-
-Consulte [Changelog](CHANGELOG.md) para uma lista detalhada das mudanças para cada versão.
-
-## Licença
-
-[MIT](https://github.com/ramonmatias19/n8n-nodes-canva/blob/main/LICENSE.md)
-
-## Desenvolvimento
-
-### Setup
-
-```bash
-# Clone o repositório
-git clone https://github.com/ramonmatias19/n8n-nodes-canva.git
-cd n8n-nodes-canva
-
-# Instale as dependências
-npm install
-
-# Build do projeto
-npm run build
-```
-
-### Scripts
-
-- `npm run build` - Compila o projeto
-- `npm run dev` - Executa TypeScript em modo watch
-- `npm run format` - Formata o código usando Prettier
-- `npm run lint` - Executa ESLint
-- `npm run lintfix` - Corrige automaticamente problemas de lint
-
-## Contribuição
-
-Contribuições são bem-vindas! Por favor, abra uma issue primeiro para discutir o que você gostaria de mudar.
-
-## Suporte
-
-Se você encontrar algum problema ou tiver alguma dúvida:
-
-1. Verifique a [documentação oficial da API do Canva](https://www.canva.dev/docs/connect/)
-2. Procure em issues existentes no GitHub
-3. Crie uma nova issue com detalhes do problema 
+<p align="center">
+Desenvolvido com ❤️ por <b>Ramon Matias</b>
+</p> 
