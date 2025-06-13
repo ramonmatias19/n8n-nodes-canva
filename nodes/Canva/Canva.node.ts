@@ -25,7 +25,7 @@ export class Canva implements INodeType {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
-				Authorization: '=Bearer {{$credentials.accessToken}}',
+				Authorization: '=Bearer {{$credentials.oauthTokenData.access_token}}',
 			},
 		},
 		properties: [

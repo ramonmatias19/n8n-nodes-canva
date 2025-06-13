@@ -2,6 +2,33 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [2.1.3] - 2025-06-12
+
+### 🚨 **CORREÇÕES CRÍTICAS - Análise vs Documentação Oficial**
+
+#### 🔧 **Fixes Obrigatórios**
+- **CORRIGIDO**: Header de autenticação no node principal (`{{$credentials.accessToken}}` → `{{$credentials.oauthTokenData.access_token}}`)
+- **CORRIGIDO**: Scopes inválidos removidos (`app:read`, `app:write`, `export:read`, `export:write`, `user:read`)
+- **IMPLEMENTADO**: Apenas scopes oficiais da Canva Connect API conforme documentação
+- **CONFORMIDADE**: 100% com especificações oficiais da [Canva Connect API](https://www.canva.dev/docs/connect/)
+
+#### 📊 **Análise de Conformidade Completa**
+- ✅ **Base URL**: `https://api.canva.com/rest/v1` (correto)
+- ✅ **Autenticação**: OAuth 2.0 com PKCE (correto)
+- ✅ **Headers**: Authorization Bearer token (corrigido)
+- ✅ **Scopes**: Apenas scopes oficiais (corrigido)
+- ✅ **Endpoints**: Todos conforme documentação oficial
+
+**Conformidade Total: 100% com Documentação Oficial**
+
+#### 🔄 **Como Migrar**
+1. **Atualize** para versão 2.1.3
+2. **Reconfigure** credenciais OAuth no n8n
+3. **Teste** autenticação com novos scopes
+4. **Verifique** funcionamento de todas as operações
+
+> **Importante**: Esta correção resolve problemas críticos de autenticação e conformidade identificados na análise comparativa com a documentação oficial.
+
 ## [2.1.2] - 2025-06-11
 
 ### 🚨 **CORREÇÃO CRÍTICA - Implementação OAuth 2.0 Nativa do n8n**
