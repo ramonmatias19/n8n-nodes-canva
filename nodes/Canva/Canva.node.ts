@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 export class Canva implements INodeType {
 	description: INodeTypeDescription = {
@@ -12,8 +12,8 @@ export class Canva implements INodeType {
 		defaults: {
 			name: 'Canva',
 		},
-		inputs: [NodeConnectionType.Main],
-		outputs: [NodeConnectionType.Main],
+		inputs: ['main'],
+		outputs: ['main'],
 		credentials: [
 			{
 				name: 'canvaApi',
@@ -242,7 +242,7 @@ export class Canva implements INodeType {
 										type: '={{$parameter["exportFormat"]}}',
 										quality: '={{$parameter["quality"] || undefined}}',
 										transparent_background: '={{$parameter["transparentBackground"] || undefined}}',
-										lossless: '={{$parameter["lossless"] || undefined}}',
+										lossless: '={{$parameter["lossless"] || true}}',
 									},
 									pages: '={{$parameter["pageNumbers"] || undefined}}',
 								},
@@ -899,12 +899,64 @@ export class Canva implements INodeType {
 						value: 'instagram_post',
 					},
 					{
+						name: 'Instagram Story',
+						value: 'instagram_story',
+					},
+					{
+						name: 'Facebook Post',
+						value: 'facebook_post',
+					},
+					{
+						name: 'Facebook Cover',
+						value: 'facebook_cover',
+					},
+					{
+						name: 'Twitter Post',
+						value: 'twitter_post',
+					},
+					{
+						name: 'Twitter Header',
+						value: 'twitter_header',
+					},
+					{
+						name: 'LinkedIn Post',
+						value: 'linkedin_post',
+					},
+					{
+						name: 'LinkedIn Banner',
+						value: 'linkedin_banner',
+					},
+					{
+						name: 'YouTube Thumbnail',
+						value: 'youtube_thumbnail',
+					},
+					{
+						name: 'YouTube Channel Art',
+						value: 'youtube_channel_art',
+					},
+					{
 						name: 'Logo',
 						value: 'logo',
 					},
 					{
+						name: 'Business Card',
+						value: 'business_card',
+					},
+					{
+						name: 'Flyer',
+						value: 'flyer',
+					},
+					{
 						name: 'Poster',
 						value: 'poster',
+					},
+					{
+						name: 'Brochure',
+						value: 'brochure',
+					},
+					{
+						name: 'Newsletter',
+						value: 'newsletter',
 					},
 					{
 						name: 'Presentation',
@@ -913,6 +965,70 @@ export class Canva implements INodeType {
 					{
 						name: 'Video',
 						value: 'video',
+					},
+					{
+						name: 'Resume',
+						value: 'resume',
+					},
+					{
+						name: 'Invoice',
+						value: 'invoice',
+					},
+					{
+						name: 'Certificate',
+						value: 'certificate',
+					},
+					{
+						name: 'Card',
+						value: 'card',
+					},
+					{
+						name: 'Invitation',
+						value: 'invitation',
+					},
+					{
+						name: 'Menu',
+						value: 'menu',
+					},
+					{
+						name: 'Label',
+						value: 'label',
+					},
+					{
+						name: 'Sticker',
+						value: 'sticker',
+					},
+					{
+						name: 'Banner',
+						value: 'banner',
+					},
+					{
+						name: 'Infographic',
+						value: 'infographic',
+					},
+					{
+						name: 'Postcard',
+						value: 'postcard',
+					},
+					{
+						name: 'Book Cover',
+						value: 'book_cover',
+					},
+					{
+						name: 'Album Cover',
+						value: 'album_cover',
+					},
+					{
+						name: 'Mood Board',
+						value: 'mood_board',
+					},
+					{
+						name: 'Desktop Wallpaper',
+						value: 'desktop_wallpaper',
+					},
+					{
+						name: 'Mobile Wallpaper',
+						value: 'mobile_wallpaper',
 					},
 				],
 				default: 'presentation',
@@ -979,6 +1095,365 @@ export class Canva implements INodeType {
 				default: 'pdf',
 				description: 'Formato de exportação',
 			},
+			{
+				displayName: 'Transparent Background',
+				name: 'transparentBackground',
+				type: 'boolean',
+				displayOptions: {
+					show: {
+						resource: ['exports'],
+						operation: ['createJob'],
+						exportFormat: ['png'],
+					},
+				},
+				default: false,
+				description: 'Exportar PNG com fundo transparente (disponível apenas para planos pagos)',
+			},
+			{
+				displayName: 'Quality',
+				name: 'quality',
+				type: 'options',
+				displayOptions: {
+					show: {
+						resource: ['exports'],
+						operation: ['createJob'],
+						exportFormat: ['jpg', 'png'],
+					},
+				},
+				options: [
+					{
+						name: 'Low',
+						value: 'low',
+					},
+					{
+						name: 'Medium',
+						value: 'medium',
+					},
+					{
+						name: 'High',
+						value: 'high',
+					},
+				],
+				default: 'medium',
+				description: 'Qualidade da exportação',
+			},
+			{
+				displayName: 'Lossless',
+				name: 'lossless',
+				type: 'boolean',
+				displayOptions: {
+					show: {
+						resource: ['exports'],
+						operation: ['createJob'],
+						exportFormat: ['png'],
+					},
+				},
+				default: true,
+				description: 'Usar compressão sem perda para PNG',
+			},
+			{
+				displayName: 'Page Numbers',
+				name: 'pageNumbers',
+				type: 'string',
+				displayOptions: {
+					show: {
+						resource: ['exports'],
+						operation: ['createJob'],
+					},
+				},
+				default: '',
+				placeholder: '1,2,3 or 1-5',
+				description: 'Páginas específicas para exportar (opcional)',
+			},
+
+			// Comments parameters
+			{
+				displayName: 'Design ID',
+				name: 'designId',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['comments'],
+						operation: ['createThread'],
+					},
+				},
+				default: '',
+				description: 'ID do design para comentar',
+			},
+			{
+				displayName: 'Message',
+				name: 'message',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['comments'],
+						operation: ['createThread'],
+					},
+				},
+				default: '',
+				description: 'Conteúdo do comentário (máximo 2048 caracteres)',
+			},
+			{
+				displayName: 'Anchor Point',
+				name: 'anchorPoint',
+				type: 'json',
+				displayOptions: {
+					show: {
+						resource: ['comments'],
+						operation: ['createThread'],
+					},
+				},
+				default: '',
+				placeholder: '{"x": 100, "y": 150}',
+				description: 'Posição do comentário no design (opcional)',
+			},
+			{
+				displayName: 'Thread ID',
+				name: 'threadId',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['comments'],
+						operation: ['createReply', 'getThread', 'getReply', 'listReplies'],
+					},
+				},
+				default: '',
+				description: 'ID da thread de comentário',
+			},
+			{
+				displayName: 'Reply Message',
+				name: 'replyMessage',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['comments'],
+						operation: ['createReply'],
+					},
+				},
+				default: '',
+				description: 'Conteúdo da resposta (máximo 2048 caracteres)',
+			},
+			{
+				displayName: 'Reply ID',
+				name: 'replyId',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['comments'],
+						operation: ['getReply'],
+					},
+				},
+				default: '',
+				description: 'ID da resposta específica',
+			},
+
+			// Autofill parameters
+			{
+				displayName: 'Brand Template ID',
+				name: 'brandTemplateId',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['autofill'],
+						operation: ['createJob'],
+					},
+				},
+				default: '',
+				description: 'ID do template de marca para preenchimento',
+			},
+			{
+				displayName: 'Autofill Title',
+				name: 'autofillTitle',
+				type: 'string',
+				displayOptions: {
+					show: {
+						resource: ['autofill'],
+						operation: ['createJob'],
+					},
+				},
+				default: '',
+				description: 'Título do design gerado (opcional)',
+			},
+			{
+				displayName: 'Autofill Data',
+				name: 'autofillData',
+				type: 'json',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['autofill'],
+						operation: ['createJob'],
+					},
+				},
+				default: '{}',
+				description: 'Dados para preenchimento automático (formato JSON)',
+			},
+			{
+				displayName: 'Job ID',
+				name: 'jobId',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['autofill'],
+						operation: ['getJob'],
+					},
+				},
+				default: '',
+				description: 'ID do job de autofill',
+			},
+
+			// Design Imports parameters
+			{
+				displayName: 'Import URL',
+				name: 'importUrl',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['designImports'],
+						operation: ['createUrlImport'],
+					},
+				},
+				default: '',
+				description: 'URL pública do arquivo para importar',
+			},
+			{
+				displayName: 'Import Title',
+				name: 'importTitle',
+				type: 'string',
+				displayOptions: {
+					show: {
+						resource: ['designImports'],
+						operation: ['createUrlImport'],
+					},
+				},
+				default: '',
+				description: 'Título do design importado (opcional)',
+			},
+			{
+				displayName: 'Import Job ID',
+				name: 'importJobId',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['designImports'],
+						operation: ['getImportJob'],
+					},
+				},
+				default: '',
+				description: 'ID do job de importação',
+			},
+
+			// Resize parameters
+			{
+				displayName: 'Design ID',
+				name: 'designId',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['resizes'],
+						operation: ['createResize'],
+					},
+				},
+				default: '',
+				description: 'ID do design para redimensionar',
+			},
+			{
+				displayName: 'New Design Type',
+				name: 'newDesignType',
+				type: 'options',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['resizes'],
+						operation: ['createResize'],
+					},
+				},
+				options: [
+					{
+						name: 'Document',
+						value: 'document',
+					},
+					{
+						name: 'Instagram Post',
+						value: 'instagram_post',
+					},
+					{
+						name: 'Instagram Story',
+						value: 'instagram_story',
+					},
+					{
+						name: 'Facebook Post',
+						value: 'facebook_post',
+					},
+					{
+						name: 'Facebook Cover',
+						value: 'facebook_cover',
+					},
+					{
+						name: 'Logo',
+						value: 'logo',
+					},
+					{
+						name: 'Poster',
+						value: 'poster',
+					},
+					{
+						name: 'Presentation',
+						value: 'presentation',
+					},
+					{
+						name: 'Video',
+						value: 'video',
+					},
+					{
+						name: 'Business Card',
+						value: 'business_card',
+					},
+					{
+						name: 'Flyer',
+						value: 'flyer',
+					},
+				],
+				default: 'instagram_post',
+				description: 'Novo tipo de design para redimensionamento',
+			},
+			{
+				displayName: 'Resize Title',
+				name: 'resizeTitle',
+				type: 'string',
+				displayOptions: {
+					show: {
+						resource: ['resizes'],
+						operation: ['createResize'],
+					},
+				},
+				default: '',
+				description: 'Título do design redimensionado (opcional)',
+			},
+			{
+				displayName: 'Resize Job ID',
+				name: 'resizeJobId',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['resizes'],
+						operation: ['getResizeJob'],
+					},
+				},
+				default: '',
+				description: 'ID do job de redimensionamento',
+			},
 
 			// Folder parameters
 			{
@@ -994,6 +1469,32 @@ export class Canva implements INodeType {
 				},
 				default: '',
 				description: 'Nome da pasta',
+			},
+
+			// Pagination parameters
+			{
+				displayName: 'Limit',
+				name: 'limit',
+				type: 'number',
+				displayOptions: {
+					show: {
+						operation: ['list'],
+					},
+				},
+				default: 10,
+				description: 'Número máximo de itens a retornar (1-100)',
+			},
+			{
+				displayName: 'Continuation',
+				name: 'continuation',
+				type: 'string',
+				displayOptions: {
+					show: {
+						operation: ['list'],
+					},
+				},
+				default: '',
+				description: 'Token de continuação para paginação',
 			},
 
 			// Asset parameters

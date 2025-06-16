@@ -52,7 +52,7 @@ export class CanvaApi implements ICredentialType {
 			displayName: 'Scope',
 			name: 'scope',
 			type: 'hidden',
-			default: 'asset:read asset:write brandtemplate:content:read brandtemplate:meta:read comment:read comment:write design:content:read design:content:write design:meta:read design:permission:read folder:read folder:write profile:read',
+			default: 'app:read app:write asset:read asset:write brandtemplate:content:read brandtemplate:meta:read collaboration:event comment:read comment:write design:content:read design:content:write design:meta:read design:permission:read design:permission:write folder:read folder:write folder:permission:read folder:permission:write profile:read',
 				},
 				{
 			displayName: 'Auth URI Query Parameters',
