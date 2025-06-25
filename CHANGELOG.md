@@ -2,6 +2,29 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [2.1.6] - 2025-01-23
+
+### 🔧 **ATUALIZAÇÃO DE SCOPOS**
+
+#### ✅ **Scopos Atualizados**
+- **REMOVIDO**: Scope `collaboration:event` (não oficial)
+- **MANTIDOS**: Apenas scopos oficiais da Canva Connect API
+- **CONFORMIDADE**: 100% com documentação oficial atualizada
+
+#### 📋 **Scopos Atuais**
+- `app:read`, `app:write` - Acesso à aplicação
+- `asset:read`, `asset:write` - Gerenciamento de assets
+- `brandtemplate:content:read`, `brandtemplate:meta:read` - Templates de marca
+- `comment:read`, `comment:write` - Comentários
+- `design:content:read`, `design:content:write` - Conteúdo de designs
+- `design:meta:read` - Metadados de designs
+- `design:permission:read`, `design:permission:write` - Permissões de designs
+- `folder:read`, `folder:write` - Gerenciamento de pastas
+- `folder:permission:read`, `folder:permission:write` - Permissões de pastas
+- `profile:read` - Perfil do usuário
+
+> **Importante**: Reconfigure suas credenciais OAuth se necessário para aplicar os novos scopos.
+
 ## [2.1.3] - 2025-06-12
 
 ### 🚨 **CORREÇÕES CRÍTICAS - Análise vs Documentação Oficial**
