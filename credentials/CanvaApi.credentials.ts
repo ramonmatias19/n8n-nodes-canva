@@ -12,6 +12,13 @@ export class CanvaApi implements ICredentialType {
 	extends = ['oAuth2Api'];
 	properties: INodeProperties[] = [
 		{
+			displayName: '⚠️ CONFIGURAÇÃO OBRIGATÓRIA DE SCOPES',
+			name: 'scopesNotice',
+			type: 'notice',
+			default: '',
+			description: 'ATENÇÃO: Para evitar erro "invalid_scope", habilite TODOS os 18 scopes no seu Canva Developer Portal: app:read, app:write, asset:read, asset:write, brandtemplate:content:read, brandtemplate:meta:read, comment:read, comment:write, design:content:read, design:content:write, design:meta:read, design:permission:read, design:permission:write, folder:read, folder:write, folder:permission:read, folder:permission:write, profile:read',
+		},
+		{
 			displayName: 'Grant Type',
 			name: 'grantType',
 			type: 'hidden',
@@ -38,6 +45,7 @@ export class CanvaApi implements ICredentialType {
 			default: '',
 			required: true,
 			description: 'Client ID obtido no Canva Developer Portal',
+			hint: 'IMPORTANTE: Certifique-se de habilitar TODOS os 18 scopes na seção Scopes da sua integração no Canva Developer Portal',
 		},
 		{
 			displayName: 'Client Secret',
@@ -47,6 +55,7 @@ export class CanvaApi implements ICredentialType {
 			default: '',
 			required: true,
 			description: 'Client Secret gerado no Canva Developer Portal',
+			hint: 'Se receber erro "invalid_scope", verifique se todos os scopes estão habilitados na sua integração',
 		},
 		{
 			displayName: 'Scope',
