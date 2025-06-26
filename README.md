@@ -172,7 +172,7 @@ npm install n8n-nodes-canva
 
 Este node agora usa **OAuth 2.0 nativo do n8n** para autenticação automática:
 
-1. **Crie uma integração no [Canva Developer Portal](https://www.canva.dev/)**
+1. **Crie uma integração no [Canva Developer Portal](https://www.canva.com/developers/)**
    - Faça login no Developer Portal
    - Ative a MFA (Multi-Factor Authentication) se necessário
    - Vá para "Your Integrations" e clique em "Create an integration"
@@ -182,7 +182,7 @@ Este node agora usa **OAuth 2.0 nativo do n8n** para autenticação automática:
    - Defina um nome para sua integração
    - **Copie o Client ID** (será necessário no n8n)
    - **Gere e salve o Client Secret** (será necessário no n8n)
-   - **IMPORTANTE**: Adicione URL de redirecionamento OAuth: `[YOUR-URL-BASE]/rest/oauth2-credential/callback`
+   - **IMPORTANTE**: Copie a URL de redirecionamento OAuth: `[YOUR-URL-BASE]/rest/oauth2-credential/callback`
 
 3. **⚠️ CONFIGURAÇÃO CRÍTICA DE SCOPES:**
    
@@ -245,11 +245,12 @@ Received following query parameters: {"error":"invalid_scope","error_description
 ```
 
 **Solução**: 
-1. Acesse sua integração no [Canva Developer Portal](https://developers.canva.com/apps)
-2. Vá para a seção **"Scopes"** da sua integração
-3. **Marque/habilite TODOS os 18 scopes** listados na seção de configuração acima
-4. Salve as alterações
-5. Tente a conexão OAuth novamente no n8n
+1. Acesse sua integração no [Canva Developer Portal](https://www.canva.com/developers/apps)
+2. Vá para a seção **"Your integrations"** > **"Create an integration"**
+3. Vá para a seção **"Scopes"** da sua integração
+4. **Marque/habilite TODOS os 18 scopes** listados na seção de configuração acima
+5. Salve as alterações
+6. Tente a conexão OAuth novamente no n8n
 
 > **Causa**: Este erro ocorre quando a aplicação OAuth2 no Canva não está configurada com todos os scopes que o n8n-nodes-canva precisa para funcionar corretamente.
 
