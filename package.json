@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-canva",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "description": "Node customizado do n8n para integração com Canva Connect APIs",
   "keywords": [
     "n8n-community-node-package",
