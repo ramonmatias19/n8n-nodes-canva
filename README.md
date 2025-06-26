@@ -182,17 +182,43 @@ Este node agora usa **OAuth 2.0 nativo do n8n** para autenticação automática:
    - Defina um nome para sua integração
    - **Copie o Client ID** (será necessário no n8n)
    - **Gere e salve o Client Secret** (será necessário no n8n)
-   - Configure os scopes necessários para suas operações
    - **IMPORTANTE**: Adicione URL de redirecionamento OAuth: `http://localhost:5678/rest/oauth2-credential/callback`
 
-3. **No n8n, crie uma nova credencial "Canva API":**
+3. **⚠️ CONFIGURAÇÃO CRÍTICA DE SCOPES:**
+   
+   **ATENÇÃO**: Para evitar o erro `"invalid_scope"`, você DEVE habilitar TODOS os scopes listados abaixo na seção [Scopes](https://www.canva.com/developers/integrations/connect-api/OC-AZdfrFR-sRaf/scopes) da sua integração:
+   
+   ```
+   app:read
+   app:write
+   asset:read
+   asset:write
+   brandtemplate:content:read
+   brandtemplate:meta:read
+   comment:read
+   comment:write
+   design:content:read
+   design:content:write
+   design:meta:read
+   design:permission:read
+   design:permission:write
+   folder:read
+   folder:write
+   folder:permission:read
+   folder:permission:write
+   profile:read
+   ```
+   
+   > **🚨 IMPORTANTE**: Marque/habilite **TODOS** os 18 scopes acima na sua integração do Canva Developer Portal. Se qualquer scope estiver faltando, você receberá o erro `"invalid_scope"` durante a autenticação OAuth.
+
+4. **No n8n, crie uma nova credencial "Canva API":**
    - **Client ID**: Cole o Client ID obtido no Developer Portal
    - **Client Secret**: Cole o Client Secret gerado no Developer Portal
    - Clique em **"Connect my account"** para iniciar o fluxo OAuth
    - Autorize a aplicação na tela do Canva
    - ✅ **Pronto!** O n8n gerenciará automaticamente tokens e renovações
 
-4. **🎯 Vantagens do OAuth Nativo:**
+5. **🎯 Vantagens do OAuth Nativo:**
    - ✅ **Configuração simplificada** - Apenas Client ID e Secret
    - ✅ **Renovação automática** - n8n gerencia refresh tokens
    - ✅ **Segurança aprimorada** - Sem tokens manuais expostos
@@ -209,6 +235,23 @@ Para usar o **Canva Trigger**:
 3. Ative o workflow
 4. O webhook será automaticamente registrado no Canva
 5. Quando desativar o workflow, o webhook será removido automaticamente
+
+### 🚨 Troubleshooting - Erro "invalid_scope"
+
+**Problema**: Durante a autenticação OAuth, você recebe o erro:
+```
+Error: Insufficient parameters for OAuth2 callback.
+Received following query parameters: {"error":"invalid_scope","error_description":"Requested scopes are not allowed for this client."}
+```
+
+**Solução**: 
+1. Acesse sua integração no [Canva Developer Portal](https://developers.canva.com/apps)
+2. Vá para a seção **"Scopes"** da sua integração
+3. **Marque/habilite TODOS os 18 scopes** listados na seção de configuração acima
+4. Salve as alterações
+5. Tente a conexão OAuth novamente no n8n
+
+> **Causa**: Este erro ocorre quando a aplicação OAuth2 no Canva não está configurada com todos os scopes que o n8n-nodes-canva precisa para funcionar corretamente.
 
 <h1></h1>
 
