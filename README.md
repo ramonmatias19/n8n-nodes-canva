@@ -182,11 +182,11 @@ Este node agora usa **OAuth 2.0 nativo do n8n** para autenticação automática:
    - Defina um nome para sua integração
    - **Copie o Client ID** (será necessário no n8n)
    - **Gere e salve o Client Secret** (será necessário no n8n)
-   - **IMPORTANTE**: Adicione URL de redirecionamento OAuth: `http://localhost:5678/rest/oauth2-credential/callback`
+   - **IMPORTANTE**: Adicione URL de redirecionamento OAuth: `[YOUR-URL-BASE]/rest/oauth2-credential/callback`
 
 3. **⚠️ CONFIGURAÇÃO CRÍTICA DE SCOPES:**
    
-   **ATENÇÃO**: Para evitar o erro `"invalid_scope"`, você DEVE habilitar TODOS os scopes listados abaixo na seção [Scopes](https://www.canva.com/developers/integrations/connect-api/OC-AZdfrFR-sRaf/scopes) da sua integração:
+   **ATENÇÃO**: Para evitar o erro `"invalid_scope"`, você DEVE habilitar TODOS os scopes listados abaixo na seção [Scopes](https://www.canva.com/developers/integrations/connect-api/) da sua integração:
    
    ```
    app:read
