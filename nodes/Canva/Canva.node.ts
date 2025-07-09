@@ -1,11 +1,11 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 export class Canva implements INodeType {
-	description: INodeTypeDescription = {
+	description: INodeTypeDescription & { usableAsTool?: boolean } = {
 		displayName: 'Canva',
 		name: 'canva',
 		icon: 'file:logo.svg',
-		group: ['transform'],
+		group: ['tool'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Trabalhe com a API Connect do Canva para designs e assets',
@@ -14,6 +14,7 @@ export class Canva implements INodeType {
 		},
 		inputs: ['main'],
 		outputs: ['main'],
+		usableAsTool: true,
 		credentials: [
 			{
 				name: 'canvaApi',
